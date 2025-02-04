@@ -380,11 +380,10 @@ const validate = (
       const newValue = validation(value, allowParse, src);
       return newValue === undefined ? value : newValue;
     } catch (e) {
-      console.warn(
+      throw new Error(
         `Validation of setting '${path}' (${sourceDescription}) with value '${value}' failed: `
-          + `${e}. Ignoring.`
+        + `${e}.`
       );
-      return null;
     }
   };
 
@@ -405,8 +404,8 @@ const validate = (
           out[key] = validatedValue;
         }
       } else {
-        console.warn(
-          `'${newPath}' (${sourceDescription}) is not a valid settings key. Ignoring.`
+        throw new Error(
+          `'${newPath}' (${sourceDescription}) is not a valid settings key.`
         );
       }
     }
