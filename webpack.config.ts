@@ -80,6 +80,11 @@ const config: CallableOption = (_env, argv) => ({
       patterns: [
         { from: path.join(__dirname, "assets/logo-wide.svg"), to: OUT_PATH },
         { from: path.join(__dirname, "assets/logo-narrow.svg"), to: OUT_PATH },
+        ...argv.mode === "development" ? [{
+          from: path.join(__dirname, "assets/settings.toml"),
+          to: OUT_PATH,
+          noErrorOnMissing: true,
+        }] : [],
 
         // Copy the font related files to output directory
         {

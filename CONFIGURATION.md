@@ -75,14 +75,7 @@ further below for information on that.
 
 # Defines which ACL to send when uploading the recording. See below for
 # more information.
-#acl = false
-# -OR-
-#acl = """
-#<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-#<Policy ...>
-#  ...
-#</Policy>
-#"""
+#acl = ...
 
 # Defines a custom DC-Catalog (as a template). See below for more information.
 #dcc = """
@@ -277,9 +270,10 @@ By default, this template is used:
 With `upload.acl` you can configure which ACL is sent (as an attachment) to the Opencast server when uploading. Possible values:
 - `true`: use the default ACL (this is the default behavior)
 - `false`: do not send an ACL when uploading
+- An object with string keys and string arrays as values, mapping from roles to list of allowed actions.
 - A string containing a valid ACL XML template (note the `"""` multi line string in TOML)
 
-The ACL XML template is a [Mustache.js template](https://mustache.github.io/mustache.5.html).
+The ACL XML as well as each string in the object is a [Mustache.js template](https://mustache.github.io/mustache.5.html).
 Summary of the template format: you can insert variables with `{{ foo }}`.
 You can also access subfields like `{{ foo.bar }}` (if `foo` or `bar` is `null`, the expression just evaluates to the empty string).
 Conditionals/loops work with the `{{ #foo }} ... {{ /foo }}` syntax:
@@ -297,10 +291,25 @@ Otherwise, processing will fail.
 
 #### Examples
 
-<details>
-<summary>The default ACL template</summary>
+##### The default ACL template
 
 The default ACL template simply gives read and write access to `user.userRole`:
+
+```toml
+[upload]
+acl = { "{{ user.userRole }}" = ["read", "write"] }
+```
+
+Or in alternative TOML syntax:
+
+```toml
+[upload]
+acl."{{ user.userRole }}" = ["read", "write"]
+```
+
+Or as XML template:
+
+<details>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -353,13 +362,33 @@ The default ACL template simply gives read and write access to `user.userRole`:
 
 </details>
 
+##### Specifying via URL
 
-<details>
-<summary>Also giving access to LTI instructors</summary>
+To specify the ACL via URL parameter, it's likely not feasible to use XML.
+You can use the object notation tho, by specifying a JSON object like this:
+
+```
+https://studio.opencast.org/?upload.acl={"ROLE_FOO":["read"],"{{user.userRole}}":["read","write"]}
+```
+
+Remember to percent encode the whole JSON object!
+
+This is equivalent to the following TOML:
+
+```toml
+[upload]
+acl.ROLE_FOO = "read"
+acl."{{ user.userRole }}" = ["read", "write"]
+```
+
+
+##### Also giving access to LTI instructors
 
 This extends the default template and additionally gives read and write access to the LTI instructors (`{{ lti.context_id }}_Instructor`), *if* the user comes from an LTI session.
 Note the use of conditionals `{{ #lti.context_id }} ... {{ /lti.context_id }}`.
 If you also want to add read access for learners, just add another `<Rule>` with `{{ lti.context_id }}_Learner`.
+
+<details>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
