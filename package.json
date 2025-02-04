@@ -48,7 +48,7 @@
     "use-resize-observer": "^9.1.0",
     "webm-duration-fix": "^1.0.4",
     "webpack": "^5.97.1",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^6.0.1"
   },
   "devDependencies": {
     "@opencast/eslint-config-ts-react": "^0.2.0",
