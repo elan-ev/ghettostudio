@@ -135,7 +135,7 @@ export class Opencast {
         && "id" in s
         && "title" in s
         && typeof s.id === "string"
-        && typeof s.title === "string"
+        && typeof s.title === "string",
       )
     );
     if (!isProperForm(series)) {
@@ -343,7 +343,7 @@ export class Opencast {
     let headers = {};
     if (this.#login !== true && this.#login?.username && this.#login?.password) {
       const encoded = btoa(unescape(encodeURIComponent(
-        this.#login.username + ":" + this.#login.password
+        this.#login.username + ":" + this.#login.password,
       )));
       headers = { "Authorization": `Basic ${encoded}` };
     }
@@ -427,7 +427,7 @@ export class Opencast {
 
       // Add metadata to media package
       mediaPackage = await this.addDcCatalog(
-        { mediaPackage, uploadSettings, title, presenter, series, startTime, endTime }
+        { mediaPackage, uploadSettings, title, presenter, series, startTime, endTime },
       );
 
       // Set appropriate ACL unless the configuration says no.
@@ -437,7 +437,7 @@ export class Opencast {
 
       // Add all recordings (this is the actual upload).
       mediaPackage = await this.uploadTracks(
-        { mediaPackage, recordings, onProgress, title, presenter }
+        { mediaPackage, recordings, onProgress, title, presenter },
       );
 
       if (start != null || end != null) {
@@ -583,7 +583,7 @@ export class Opencast {
         // Add HTTP Basic Auth headers if username and password are provided.
         if (this.#login !== true && this.#login?.username && this.#login?.password) {
           const encoded = btoa(unescape(encodeURIComponent(
-            this.#login.username + ":" + this.#login.password
+            this.#login.username + ":" + this.#login.password,
           )));
           xhr.setRequestHeader("Authorization", `Basic ${encoded}`);
         }
@@ -673,7 +673,7 @@ export class Opencast {
 
     if (!hasRoles(this.#currentUser)) {
       // Internal error: this should not happen.
-      throw new Error(`'currentUser' is '${this.#currentUser}' in 'constructAcl'`);
+      throw new Error(`'currentUser' is '${JSON.stringify(this.#currentUser)}' in 'constructAcl'`);
     }
 
     // Prepare template "view": the values that can be used within the template.

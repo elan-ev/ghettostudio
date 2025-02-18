@@ -220,6 +220,7 @@ const UploadForm: React.FC<UploadFormProps> = ({ handleUpload }) => {
     if (presenterValue !== presenter) {
       dispatch({ type: "UPDATE_PRESENTER", value: presenterValue });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const configurableServerUrl = settingsManager.isConfigurable("opencast.serverUrl");
@@ -540,7 +541,7 @@ const SeriesSelect: React.FC<SeriesSelectProps> = ({ formProps, showOpencastSect
       result => {
         const options = [...result.entries()].map(([value, label]) => ({ value, label }));
         options.sort(
-          (a, b) => a.label.localeCompare(b.label, i18n.language, { sensitivity: "base" })
+          (a, b) => a.label.localeCompare(b.label, i18n.language, { sensitivity: "base" }),
         );
 
         // If a seriesID is given, make the select use that as default value.
@@ -563,7 +564,7 @@ const SeriesSelect: React.FC<SeriesSelectProps> = ({ formProps, showOpencastSect
         setOptions("error");
       },
     );
-  }, [opencast]);
+  }, [opencast, t, i18n.language, seriesId]);
 
   const inputId = useId();
   const errorId = useId();

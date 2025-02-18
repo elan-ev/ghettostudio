@@ -51,8 +51,8 @@
     "webpack-cli": "^5.1.4"
   },
   "devDependencies": {
-    "@opencast/eslint-config-ts-react": "^0.2.0",
-    "@stylistic/eslint-plugin-ts": "^3.0.1",
+    "@opencast/eslint-config-ts-react": "^0.3.0",
+    "@stylistic/eslint-plugin-ts": "3.1",
     "@types/iarna__toml": "^2.0.5",
     "@types/mustache": "^4.2.5",
     "@types/node": "^22.13.0",
@@ -61,17 +61,13 @@
     "@types/react-dom": "^18.3.0",
     "@types/react-page-visibility": "^6.4.4",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
-    "eslint": "^8.57.0",
-    "eslint-plugin-react": "^7.37.4",
-    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint": "^9.20.1",
     "eslint-webpack-plugin": "^4.2.0",
     "fork-ts-checker-webpack-plugin": "^9.0.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
+    "typescript-eslint": "^8.24.0",
     "webpack-dev-server": "^5.2.0"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": [
     "defaults"

@@ -131,7 +131,7 @@ const Warnings = () => {
     window.location.hostname !== "127.0.0.1";
   if (usingUnsecureConnection) {
     warnings.push(
-      <ErrorBox body={t("warning-https")} />
+      <ErrorBox body={t("warning-https")} />,
     );
   }
 

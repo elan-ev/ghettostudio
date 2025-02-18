@@ -32,7 +32,7 @@ export async function startAudioCapture(dispatch: Dispatcher, deviceId?: Constra
     dispatch({ type: "SHARE_AUDIO", stream });
   } catch (err) {
     // TODO: there several types of exceptions; certainly we should differentiate here one day
-    console.error("Error: " + err);
+    console.error("Error: ", err);
 
     dispatch({ type: "BLOCK_AUDIO" });
   }
@@ -69,7 +69,7 @@ export async function startDisplayCapture(
     dispatch({ type: "SHARE_DISPLAY", stream });
   } catch (err) {
     // TODO: there 7 types of exceptions; certainly we should differentiate here one day
-    console.error("Error: " + err);
+    console.error("Error: ", err);
 
     dispatch({ type: "BLOCK_DISPLAY" });
   }
@@ -105,7 +105,7 @@ export async function startUserCapture(
     dispatch({ type: "SHARE_USER", stream });
   } catch (err) {
     // TODO: there 7 types of exceptions; certainly we should differentiate here one day
-    console.error("Error: " + err);
+    console.error("Error: ", err);
 
     dispatch({ type: "BLOCK_USER" });
   }

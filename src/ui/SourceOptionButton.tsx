@@ -16,7 +16,7 @@ export type SourceOptionButtonProps = {
 };
 
 export const SourceOptionButton: React.FC<SourceOptionButtonProps> = (
-  { icon, label, onClick, shortcut, disabledText, ariaLabel }
+  { icon, label, onClick, shortcut, disabledText, ariaLabel },
 ) => {
   const { isHighContrast } = useColorScheme();
 

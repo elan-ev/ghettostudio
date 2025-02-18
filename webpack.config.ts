@@ -70,6 +70,7 @@ const config: CallableOption = (_env, argv) => ({
     new ForkTsCheckerWebpackPlugin(),
     new ESLintPlugin({
       extensions: ["ts", "tsx", "js"],
+      configType: "flat",
     }),
 
     new HtmlWebpackPlugin({
@@ -85,7 +86,9 @@ const config: CallableOption = (_env, argv) => ({
         {
           from: path.join(__dirname, "node_modules/@fontsource-variable/@(roboto-flex|vazirmatn)/index.css"),
           to: "font.css",
-          transformAll: assets => assets.map(assets => assets.data).join("\n").replace(/url\(.\/files\//g, "url(./fonts/"),
+          transformAll: assets => assets.map(assets => assets.data)
+            .join("\n")
+            .replace(/url\(.\/files\//g, "url(./fonts/"),
         },
         ...(
           [
@@ -101,7 +104,8 @@ const config: CallableOption = (_env, argv) => ({
           }))
         ),
         {
-          from: path.join(__dirname, "node_modules/@fontsource-variable/vazirmatn/files/vazirmatn-arabic-wght-normal.woff2"),
+          from: path.join(__dirname,
+            "node_modules/@fontsource-variable/vazirmatn/files/vazirmatn-arabic-wght-normal.woff2"),
           to: path.join(OUT_PATH, "fonts", "vazirmatn-arabic-wght-normal.woff2"),
         },
       ],

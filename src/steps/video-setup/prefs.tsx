@@ -322,7 +322,7 @@ type UniveralSettingsProps = {
 };
 
 const UniveralSettings: React.FC<UniveralSettingsProps> = (
-  { isDesktop, updatePrefs, prefs, settings }
+  { isDesktop, updatePrefs, prefs, settings },
 ) => {
   const { t } = useTranslation();
 

@@ -235,5 +235,5 @@ const HeaderButton = forwardRef<HTMLButtonElement, HeaderButtonProps>(
         {children}
       </ProtoButton>
     );
-  }
+  },
 );

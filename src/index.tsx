@@ -53,7 +53,7 @@ initialize.then(
             </StudioStateProvier>
           </SettingsProvider>
         </OpencastProvider>
-      </React.StrictMode>
+      </React.StrictMode>,
     );
   },
 

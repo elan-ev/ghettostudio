@@ -187,7 +187,7 @@ export class SettingsManager {
           console.warn(
             `URL GET parameter '${key}' is ignored as 'config' is specified. Either specify `
             + " all configuration via the 'config' GET parameter hex string or via direct GET "
-            + "parameters. Mixing is not allowed."
+            + "parameters. Mixing is not allowed.",
           );
         }
       }
@@ -265,7 +265,7 @@ export class SettingsManager {
       return null;
     } else if (!response.ok) {
       console.error(
-        `Fetching '${settingsPath}' failed: ${response.status} ${response.statusText}`
+        `Fetching '${settingsPath}' failed: ${response.status} ${response.statusText}`,
       );
       return null;
     }
@@ -379,10 +379,10 @@ const validate = (
     try {
       const newValue = validation(value, allowParse, src);
       return newValue === undefined ? value : newValue;
-    } catch (e) {
+    } catch (error) {
       console.warn(
-        `Validation of setting '${path}' (${sourceDescription}) with value '${value}' failed: `
-          + `${e}. Ignoring.`
+        `Validation of setting '${path}' (${sourceDescription}) failed -> ignoring...`,
+        { value, error },
       );
       return null;
     }
@@ -406,7 +406,7 @@ const validate = (
         }
       } else {
         console.warn(
-          `'${newPath}' (${sourceDescription}) is not a valid settings key. Ignoring.`
+          `'${newPath}' (${sourceDescription}) is not a valid settings key. Ignoring.`,
         );
       }
     }
@@ -517,7 +517,7 @@ const metaDataField: Validator<FormFieldState> = v => {
   if (![FORM_FIELD_HIDDEN, FORM_FIELD_OPTIONAL, FORM_FIELD_REQUIRED].includes(v)) {
     throw new Error(
       `has to be either '${FORM_FIELD_HIDDEN}', '${FORM_FIELD_OPTIONAL}' or `
-        + `'${FORM_FIELD_REQUIRED}', but is '${v}'`
+        + `'${FORM_FIELD_REQUIRED}', but is '${v}'`,
     );
   }
 

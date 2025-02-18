@@ -444,7 +444,7 @@ type CutControlsProps = SharedProps & {
 };
 
 const CutControls: React.FC<CutControlsProps> = (
-  { marker, value, control, invariant, currentTime, previewController, recordingDispatch }
+  { marker, value, control, invariant, currentTime, previewController, recordingDispatch },
 ) => {
   const { t, i18n } = useTranslation();
   const { isHighContrast } = useColorScheme();
